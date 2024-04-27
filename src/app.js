@@ -2,6 +2,10 @@ import express from "express";
 import connectDataBase from "./config/dbConnect.js";
 
 const conexao = await connectDataBase();
+conexao.on("error", (erro) => console.error("Erro na conexão", erro));
+
+conexao.once("open", () => console.log("Conexão estabelecida com sucesso"));
+
 const app = express();
 app.use(express.json()); //middleware do express para permitir o uso do req.body
 
