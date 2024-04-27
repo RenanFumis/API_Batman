@@ -1,6 +1,7 @@
 import express from "express";
 
 const app = express();
+app.use(express.json());//middleware do express para permitir o uso do req.body
 
 const herois =[
   {
@@ -10,7 +11,7 @@ const herois =[
     profissao: "Empresario",
     genero: "Masculino",
     estado_civil: "Solteiro",
-    primeira_aparicao: "Detective Comics #27",
+    primeira_aparicao: "Detective Comics #27"
   },
   {
     id: 2,
@@ -38,6 +39,10 @@ app.get("/", (req, res)=> {
 
 app.get("/herois", (req, res)=> {
   res.status(200).json(herois);
+});
+
+app.post("/herois", (req, res)=> {
+  herois.push(req.body)
 });
 
 app.get("/viloes", (req, res)=> {
