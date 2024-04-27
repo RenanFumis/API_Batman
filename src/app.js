@@ -33,6 +33,11 @@ const herois =[
   }
 ]
 
+function buscarHeroi(id){
+  return herois.findIndex(heroi => heroi.id === Number(id));
+
+}
+
 app.get("/", (req, res)=> {
   res.status(200).send("Criado por Bob Kane e escritor Bill Finger, Batman eh um personagem de quadrinhos publicado pela DC Comics em 1939");
 })
@@ -43,7 +48,13 @@ app.get("/herois", (req, res)=> {
 
 app.post("/herois", (req, res)=> {
   herois.push(req.body)
+  res.status(201).send("Heroi adicionado com sucesso");
 });
+
+app.get("/herois/:id", (req, res) =>{
+  const index = buscarHeroi(req.params.id);
+  res.status(200).json(herois[index]);
+})
 
 app.get("/viloes", (req, res)=> {
   res.status(200).send("Lista de viloes do universo Batman");
