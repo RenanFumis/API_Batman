@@ -1,0 +1,5 @@
+- Item 1 API criada com express
+- Item 2 Testes realizados com o Postman
+- Item 3 Banco de dados em nuvem utilizado Mongo Atlas
+- Item 4 Biblioteca utilizada mooogose
+- Item 5 Utilizado variável de ambiente, instalando a biblioteca dotenv

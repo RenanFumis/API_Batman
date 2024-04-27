@@ -1,5 +1,7 @@
 import express from "express";
+import connectDataBase from "./config/dbConnect.js";
 
+const conexao = await connectDataBase();
 const app = express();
 app.use(express.json()); //middleware do express para permitir o uso do req.body
 
