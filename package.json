@@ -1,0 +1,13 @@
+{
+  "name": "batman_api",
+  "version": "1.0.0",
+  "description": "API RESTful de um sistema de CRUD de heróis e vilões do universo do Batman.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Renan Fumis",
+  "license": "ISC"
+}
