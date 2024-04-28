@@ -51,9 +51,9 @@ app.get("/", (req, res) => {
     );
 });
 
-app.get("/herois", (req, res) => {
-  res.status(200).json(herois);
-});
+// app.get("/herois", (req, res) => {
+//   res.status(200).json(herois);
+// });
 
 app.post("/herois", (req, res) => {
   herois.push(req.body);
