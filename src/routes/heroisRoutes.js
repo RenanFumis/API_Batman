@@ -1,3 +1,4 @@
+//Responsável pelas rotas da aplicação referente aos heróis
 import express from "express";
 import HeroisController from "../controllers/heroisController.js";
 

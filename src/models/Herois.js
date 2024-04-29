@@ -1,3 +1,4 @@
+//REsponsável por criar o modelo de dados do banco de dados segundo a biblioteca mongoose
 import mongoose from "mongoose";
 
 const heroisSchema = new mongoose.Schema(
@@ -16,6 +17,5 @@ const heroisSchema = new mongoose.Schema(
 );
 
 const heroi = mongoose.model("herois", heroisSchema);
-
 
 export default heroi;
