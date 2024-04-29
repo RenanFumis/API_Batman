@@ -17,32 +17,6 @@ app.get("/", (req, res) => {
 })
 
 
-app.get("/herois", async (req, res) => {
-  const heroisLista = await heroi.find({});
-  res.status(200).json(heroisLista);
-})
-
-app.get("/herois", async (req, res) => {
-  const listarHerois = await heroi.find({});
-      res.status(200).json(listarHerois);
-})
-
-app.post("/herois", (req, res) => {
-  herois.push(req.body);
-  res.status(201).send("Heroi adicionado com sucesso");
-});
-
-app.get("/herois/:id", (req, res) => {
-  const index = buscarHeroi(req.params.id);
-  res.status(200).json(herois[index]);
-});
-
-app.put("/herois/:id", (req, res) => {
-  const index = buscarHeroi(req.params.id);
-  herois[index] = req.body;
-  res.status(202).send("Heroi atualizado com sucesso");
-});
-
 app.delete("/herois/:id", (req, res) => {
   const index = buscarHeroi(req.params.id);
   herois.splice(index, 1);
