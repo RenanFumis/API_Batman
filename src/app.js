@@ -2,14 +2,19 @@
 import express from "express";
 import connectDataBase from "./config/dbConnect.js";
 import routes from "./routes/index.js";
+import manipuladorDeErros from "./middlewares/manipuladorDeErros.js";
+
 
 const conexao = await connectDataBase();
 
 conexao.on("error", (erro) => console.error("Erro na conexão", erro));
-conexao.once("open", () => console.log("Conexão no Banco estabelecida com sucesso"));
+conexao.once("open", () =>
+  console.log("Conexão no Banco estabelecida com sucesso")
+);
 
 const app = express();
 app.use(express.json());
 routes(app);
 
+app.use(manipuladorDeErros);
 export default app;

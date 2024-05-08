@@ -1,20 +1,17 @@
 //Responsável por controlar as requisições feitas para a API relacionadas aos herois
-import mongoose from "mongoose";
 import heroi from "../models/Herois.js";
 
 class HeroisController {
-  static async listarHerois(req, res) {
+  static async listarHerois(req, res, next) {
     try {
       const listarHerois = await heroi.find({});
       res.status(200).json(listarHerois);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: `${error.message} - Falha ao listar os herois` });
+    } catch (erro) {
+      next(erro)
     }
   }
 
-  static async listarHeroiPorId(req, res) {
+  static async listarHeroiPorId(req, res, next) {
     try {
       const id = req.params.id;
       const heroiEncontrado = await heroi.findById(id);
@@ -26,48 +23,38 @@ class HeroisController {
         .send({ message: `Heroi não encontrado`});
       }
     } catch (erro) {
-      if (erro instanceof mongoose.Error.CastError){
-        res.status(400).send({ message: "Um ou mais parâmetros são inválidos."})
-      }else{
-        res.status(500).send({ message: `Error: Erro interno de servidor.` });
-      }
+      next(erro);
     }
   }
 
-  static async adicionarHeroi(req, res) {
+  static async adicionarHeroi(req, res, next) {
     try {
       const novoHeroi = await heroi.create(req.body);
       res
         .status(201)
         .json({ message: "Heroi adicionado com sucesso", heroi: novoHeroi });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: `${error.message} - Falha ao adicionar o heroi` });
+    } catch (erro) {
+      next(erro);
     }
   }
 
-  static async atualizarHeroi(req, res) {
+  static async atualizarHeroi(req, res, next) {
     try {
       const id = req.params.id;
       await heroi.findByIdAndUpdate(id, req.body);
       res.status(200).json({ message: "Heroi atualizado com sucesso" });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: `${error.message} - Falha na requisição do heroi` });
+    } catch (erro) {
+      next(erro);
     }
   }
 
-  static async excluirHeroi(req, res) {
+  static async excluirHeroi(req, res, next) {
     try {
       const id = req.params.id;
       await heroi.findByIdAndDelete(id);
       res.status(200).json({ message: "Heroi excluido com sucesso" });
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: `${error.message} - Falha ao excluir o heroi` });
+    } catch (erro) {
+      next(erro);
     }
   }
 }
