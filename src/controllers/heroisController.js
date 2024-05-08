@@ -1,4 +1,5 @@
 //Responsável por controlar as requisições feitas para a API relacionadas aos herois
+import mongoose from "mongoose";
 import heroi from "../models/Herois.js";
 
 class HeroisController {
@@ -17,11 +18,19 @@ class HeroisController {
     try {
       const id = req.params.id;
       const heroiEncontrado = await heroi.findById(id);
-      res.status(200).json(heroiEncontrado);
-    } catch (error) {
-      res
-        .status(500)
-        .json({ message: `${error.message} - Falha na requisição do heroi` });
+      if(heroiEncontrado !== null){
+        res.status(200).json(heroiEncontrado);
+      }else{
+        res
+        .status(404)
+        .send({ message: `Heroi não encontrado`});
+      }
+    } catch (erro) {
+      if (erro instanceof mongoose.Error.CastError){
+        res.status(400).send({ message: "Um ou mais parâmetros são inválidos."})
+      }else{
+        res.status(500).send({ message: `Error: Erro interno de servidor.` });
+      }
     }
   }
 
