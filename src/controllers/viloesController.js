@@ -1,4 +1,5 @@
 //Classe responsável por controlar as requisições dos vilões
+import NaoEncontrado from "../Erros/NaoEncontrado.js";
 import vilao from "../models/Viloes.js";
 
 class ViloesController {
@@ -19,7 +20,7 @@ class ViloesController {
       if(vilaoEncontrado !== null){
         res.status(200).json(vilaoEncontrado);
       }else{
-        res.status(404).send({message: "Vilão não encontrado" });
+        next(new NaoEncontrado("Vilão não encontrado"))
       }
     }catch (erro){
       next(erro);
@@ -29,7 +30,7 @@ class ViloesController {
   static async adicionarVilao(req, res, next){
     try{
       const novoVilao = await vilao.create(req.body);
-      res.status(201).json({message: "Heroi adicionado com sucesso", vilao: novoVilao});
+      res.status(201).json({message: "Vilão adicionado com sucesso", vilao: novoVilao});
     }catch (erro){
       next(erro);
     }
@@ -38,8 +39,14 @@ class ViloesController {
   static async atualizarVilao(req, res, next){
     try{
       const id = req.params.id;
-      await vilao.findByIdAndUpdate(id, req.body);
-      res.status(200).json({message: "Vilão atualizado com sucesso"});
+      const vilaoUpdate = await vilao.findByIdAndUpdate(id, req.body);
+
+      if(vilaoUpdate !== null){
+        res.status(200).json({message: "Vilão atualizado com sucesso"});
+      }else{
+        next(new NaoEncontrado("Vilão não encontrado"));
+      }
+      
     }catch (erro){
       next(erro);
     }
@@ -48,8 +55,14 @@ class ViloesController {
   static async excluirVilão(req, res, next){
     try{
       const id = req.params.id;
-      await vilao.findByIdAndDelete(id);
-      res.status(200).json({message: "Vilão excluido com sucesso"});
+      const vilaoEliminado = await vilao.findByIdAndDelete(id);
+
+      if(vilaoEliminado !== null){
+        res.status(200).json({message: "Vilão excluido com sucesso"});
+      }else{
+        next(new NaoEncontrado("Vilão não encontrado"));
+      }
+      
     }catch (erro){
       next(erro);
     }
