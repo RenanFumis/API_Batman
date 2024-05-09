@@ -68,6 +68,27 @@ class HeroisController {
       next(erro);
     }
   }
+
+  static  listarHeroiPorFiltro = async (req, res, next) =>{
+    try{
+      const { nome, alter_ego, profissao } = req.query;
+      const busca = {};
+      //aqui fazemos a busca por nome e/ou alter_ego
+      //para fazer a buca http://localhost:3000/herois/busca?nome=
+      if(nome) busca.nome = nome;
+      //para fazer a buca http://localhost:3000/herois/busca?alter_ego=
+      if(alter_ego) busca.alter_ego = alter_ego;
+      //http://localhost:3000/herois/busca?profissao=
+      if(profissao) busca.profissao = profissao;
+
+      const heroiResultado = await heroi.find(busca);
+
+      res.status(200).send(heroiResultado);
+    }catch(erro){
+      next(erro);
+    }
+  }
+
 }
 
 export default HeroisController;

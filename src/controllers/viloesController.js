@@ -67,6 +67,24 @@ class ViloesController {
       next(erro);
     }
   }
+  static  listarViloesPorFiltro = async (req, res, next) =>{
+    try{
+      const { nome, alter_ego, profissao } = req.query;
+      const busca = {};
+      //para fazer a buca http://localhost:3000/viloes/busca?nome=
+      if(nome) busca.nome = nome;
+      //para fazer a buca http://localhost:3000/viloes/busca?alter_ego=
+      if(alter_ego) busca.alter_ego = alter_ego;
+      //http://localhost:3000/viloes/busca?profissao=
+      if(profissao) busca.profissao = profissao;
+
+      const viloesResultado = await vilao.find(busca);
+
+      res.status(200).send(viloesResultado);
+    }catch(erro){
+      next(erro);
+    }
+  }
 };
 
 export default ViloesController;
