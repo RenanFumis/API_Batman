@@ -1,7 +1,22 @@
 # API Rest do Universo Batman
 
-<p>Esta API permite realizar operações CRUD (Create, Read, Update, Delete) com personagens do universo HQ de Batman. Você pode adicionar, visualizar, atualizar e excluir informações sobre personagens entre elas nome, alter ego, estado civil, profissão, gênero e primeira aparição nas HQs.</p>
+<p>A API Rest do Universo Batman é composta por uma estrutura organizada que facilita a interação com os dados relacionados aos personagens desse universo. Dentro dessa estrutura, destacam-se várias pastas essenciais:</p>
 
+1. **Controllers**: Nesta pasta, encontram-se dois arquivos que contêm classes destinadas à manipulação de operações CRUD de acordo com as necessidades específicas de interação.
+
+2. **Erros**: Aqui, é possível lidar com diferentes tipos de erros, proporcionando uma experiência de usuário mais robusta. Esses erros incluem:
+   - Erro de servidor (500)
+   - Erro de busca de um item (404)
+   - Erro de requisição devido a campos inválidos (400)
+   - Erro de validação de dados, caso um campo obrigatório seja submetido em branco.
+
+3. **Middlewares**: Esta pasta é responsável pela manipulação de erros e pela implementação da paginação, que controla o número de itens exibidos por página.
+
+4. **Models**: Aqui residem os modelos ou esquemas (schemas) dos dados que devem ser incluídos, proporcionando uma estrutura organizada para a representação dos dados.
+
+5. **Routes**: Esta pasta centraliza as rotas de interação, que incluem os métodos HTTP GET, POST, PUT, PATCH e DELETE. Isso permite uma gestão centralizada e clara das operações disponíveis na API.
+
+<p>Essa arquitetura é altamente ajustável e pode ser adaptada para atender diversas necessidades de uma API Rest, como o cadastro de usuários, funcionários, produtos, entre outros. Sua flexibilidade e organização fornecem uma base sólida para o desenvolvimento e expansão da API para diferentes contextos e funcionalidades.</p>
 
 ## Versão
   <p>Versão 1.1.0</p>
