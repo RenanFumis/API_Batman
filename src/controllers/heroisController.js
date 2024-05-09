@@ -2,10 +2,13 @@
 import NaoEncontrado from "../Erros/NaoEncontrado.js";
 import heroi from "../models/Herois.js";
 
+
 class HeroisController {
   static async listarHerois(req, res, next) {
     try {
-      res.status(200).json(listarHerois);
+      const buscaHerois = heroi.find({});
+      req.resultado = buscaHerois;
+      next();
     } catch (erro) {
       next(erro);
     }
@@ -74,11 +77,8 @@ class HeroisController {
       //utilizando o regex do mongoose para fazer a busca mais organica
       const busca = {};
       //aqui fazemos a busca por nome e/ou alter_ego
-      //para fazer a buca http://localhost:3000/herois/busca?nome=
       if (nome) busca.nome = { $regex: nome, $options: "i" };
-      //para fazer a buca http://localhost:3000/herois/busca?alter_ego=
       if (alter_ego) busca.alter_ego = { $regex: alter_ego, $options: "i" };
-      //http://localhost:3000/herois/busca?profissao=
       if (profissao) busca.profissao = { $regex: profissao, $options: "i" };
 
       const heroiResultado = await heroi.find(busca);
