@@ -6,21 +6,9 @@ import RequisicaoIncorreta from "../Erros/RequisicaoIncorreta.js";
 class ViloesController {
   static async listarViloes(req, res, next) {
     try {
-      let { limite = 2, pagina = 1 } = req.query;
-
-      limite = parseInt(limite);
-      pagina = parseInt(pagina);
-
-      if (limite > 0 && pagina > 0) {
-
-      const listarViloes = await vilao.find({})
-      .skip((pagina - 1) * limite)
-      .limit(limite)
-      
-      res.status(200).json(listarViloes);
-      }else{
-        next(new RequisicaoIncorreta());
-      }
+      const buscaViloes = vilao.find({});
+      req.resultado = buscaViloes;
+      next();
     } catch (erro) {
       next(erro);
     }
@@ -84,11 +72,8 @@ class ViloesController {
     try {
       const { nome, alter_ego, profissao } = req.query;
       const busca = {};
-      //para fazer a buca http://localhost:3000/viloes/busca?nome=
       if (nome) busca.nome = { $regex: nome, $options: "i" };
-      //para fazer a buca http://localhost:3000/viloes/busca?alter_ego=
       if (alter_ego) busca.alter_ego = { $regex: alter_ego, $options: "i" };
-      //http://localhost:3000/viloes/busca?profissao=
       if (profissao) busca.profissao = { $regex: profissao, $options: "i" };
 
       const viloesResultado = await vilao.find(busca);
