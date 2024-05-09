@@ -53,13 +53,13 @@ npm start
 - GET /herois ou viloes?&limite=: Define o limite de personagens por página na busca de dele.
 - GET /herois ou viloes?ordenacao=: Ordena os personagens por campo e ordem especificados.
 
-## Exemplo da URL
-```bash
+### Exemplo da URL
+```plaintext
 http://localhost:3000/herois/busca?nome=bruce
-\\o retorno será as informações do Bruce Wayne
+(o retorno será as informações do Bruce Wayne)
 
 http://localhost:3000/vilao/busca?alter_ego=coringa
-\\o retorno será as informações do Coringa
+(o retorno será as informações do Coringa)
 
 ```
 
