@@ -1,11 +1,28 @@
 //Responsável por controlar as requisições feitas para a API relacionadas aos herois
 import NaoEncontrado from "../Erros/NaoEncontrado.js";
 import heroi from "../models/Herois.js";
+import RequisicaoIncorreta from "../Erros/RequisicaoIncorreta.js";
 
 class HeroisController {
   static async listarHerois(req, res, next) {
     try {
-      res.status(200).json(listarHerois);
+      //busca por pagina http://localhost:3000/herois?pagina=
+      //pode definir o limite http://localhost:3000/herois?&limite=
+      let { limite = 2, pagina = 1 } = req.query;
+
+      limite = parseInt(limite);
+      pagina = parseInt(pagina);
+
+      if(limite > 0 && pagina > 0){
+
+        const listarHerois = await heroi.find({})
+        .skip((pagina - 1) * limite)
+        .limit(limite)
+
+        res.status(200).json(listarHerois);
+      }else{
+        next(new RequisicaoIncorreta());
+      }
     } catch (erro) {
       next(erro);
     }

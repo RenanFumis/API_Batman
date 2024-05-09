@@ -1,12 +1,26 @@
 //Classe responsável por controlar as requisições dos vilões
 import NaoEncontrado from "../Erros/NaoEncontrado.js";
 import vilao from "../models/Viloes.js";
+import RequisicaoIncorreta from "../Erros/RequisicaoIncorreta.js";
 
 class ViloesController {
   static async listarViloes(req, res, next) {
     try {
-      const listarViloes = await vilao.find({});
+      let { limite = 2, pagina = 1 } = req.query;
+
+      limite = parseInt(limite);
+      pagina = parseInt(pagina);
+
+      if (limite > 0 && pagina > 0) {
+
+      const listarViloes = await vilao.find({})
+      .skip((pagina - 1) * limite)
+      .limit(limite)
+      
       res.status(200).json(listarViloes);
+      }else{
+        next(new RequisicaoIncorreta());
+      }
     } catch (erro) {
       next(erro);
     }
