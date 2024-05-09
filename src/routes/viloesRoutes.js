@@ -5,6 +5,7 @@ import ViloesController from "../controllers/viloesController.js";
 const routes = express.Router();
 
 routes.get("/viloes", ViloesController.listarViloes);
+routes.get("/viloes/busca", ViloesController.listarViloesPorFiltro);
 routes.get("/viloes/:id", ViloesController.listarVilaoPorId);
 routes.post("/viloes", ViloesController.adicionarVilao);
 routes.put("/viloes/:id", ViloesController.atualizarVilao);
