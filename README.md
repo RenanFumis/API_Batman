@@ -1,10 +1,11 @@
 # API Rest do Universo Batman
 
 <p>Esta API permite realizar operações CRUD (Create, Read, Update, Delete) com personagens do universo HQ de Batman. Você pode adicionar, visualizar, atualizar e excluir informações sobre personagens entre elas nome, alter ego, estado civil, profissão, gênero e primeira aparição nas HQs.</p>
-<p>Foram criadas duas rotas /herois e /viloes. Ambas foram criadas separadamente para que o usuário possa escolherr entre os dois lados e navegar nos registros de cada um separadamente.</p>
+
 
 ## Versão
   <p>Versão 1.1.0</p>
+  <p>Foram criadas duas rotas de URL, cada uma implementando as operações CRUD (Create, Read, Update, Delete): <code>/herois</code> e <code>/viloes</code>. Essas rotas permitem que o usuário escolha entre os dois lados e navegue nos registros de cada um individualmente.</p>
 
 ## Tecnologias Utilizadas
 
